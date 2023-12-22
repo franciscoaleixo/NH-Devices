@@ -1,4 +1,4 @@
-# NH-Project
+# NH Project
 Home for documentation and firmware of NH devices for home use. These devices use ESP SoCs, so for every device there's an [esphome](https://github.com/esphome) compatible component.
 
 ## NH-ALCV5T24
