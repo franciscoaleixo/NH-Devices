@@ -1,5 +1,5 @@
 # NH-Project
-Home for documentation and firmware of NH devices for home use. These devices use ESP SoCs, so for every device, there's an [esphome](https://github.com/esphome)https://github.com/esphome compatible component.
+Home for documentation and firmware of NH devices for home use. These devices use ESP SoCs, so for every device, there's an [esphome](https://github.com/esphome) compatible component.
 
 ## NH-ALCV5T24
 LED PWM Constant Voltage controller. The objective of this device is to control a single channel PWM LED strip (or similar) controlled by a sensing switch.
