@@ -1,8 +1,7 @@
-#include "lightcontroller.h"
 #include "driver/ledc.h"
 #include "hal/ledc_types.h"
 
-class PwmLightController : public LightController {
+class PwmLightController {
     public:
         PwmLightController(gpio_num_t gpio) { gpio_nr = gpio; }; 
 
