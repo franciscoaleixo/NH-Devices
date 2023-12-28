@@ -11,7 +11,7 @@ CODEOWNERS = ["@franciscoaleixo"]
 light_switch_ns = cg.esphome_ns.namespace("nh_alcv5t24").namespace('nh_alcv5t24_light_switch')
 LightSwitchComponent = light_switch_ns.class_("LightSwitch", switch.Switch, cg.Component)
 
-CONFIG_SCHEMA = cv.Schema({
+CONFIG_SCHEMA = switch.SWITCH_SCHEMA.extend({
   cv.GenerateID(): cv.declare_id(LightSwitchComponent),
   cv.Required(CONF_CONTROLLER_KEY): cv.use_id(NHALCV5T24Component),
 }).extend(cv.COMPONENT_SCHEMA)

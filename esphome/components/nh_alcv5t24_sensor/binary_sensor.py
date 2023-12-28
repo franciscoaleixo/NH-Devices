@@ -11,7 +11,7 @@ CODEOWNERS = ["@franciscoaleixo"]
 binary_sensor_ns = cg.esphome_ns.namespace("nh_alcv5t24").namespace('nh_alcv5t24_binary_sensor')
 BinarySensorComponent = binary_sensor_ns.class_("BinarySensor", binary_sensor.BinarySensor, cg.Component)
 
-CONFIG_SCHEMA = cv.Schema({
+CONFIG_SCHEMA = binary_sensor.BINARY_SENSOR_SCHEMA.extend({
   cv.GenerateID(): cv.declare_id(BinarySensorComponent),
   cv.Required(CONF_CONTROLLER_KEY): cv.use_id(NHALCV5T24Component),
 }).extend(cv.COMPONENT_SCHEMA)
