@@ -2,7 +2,7 @@
 
 #include "esphome/core/component.h"
 #include "../nh_alcv5t24_light_switch/nhalcv5t24_light_switch.h"
-#include "../nh_alcv5t24_sensor/nhalcv5t24_binary_sensor.h"
+#include "../nh_alcv5t24_binary_sensor/nhalcv5t24_binary_sensor.h"
 #include "./PwmLightController.h"
 
 
