@@ -13,9 +13,9 @@ NHALCV5T24Component = nh_alcv5t24s_ns.class_("NH_ALCV5T24", cg.Component)
 # Attributes
 SWITCH_SENSOR_RELATIONSHIP = nh_alcv5t24s_ns.enum("SwitchSensorRelationship")
 SWITCH_SENSOR_RELATIONSHIP_OPTIONS = {
-    "Direct": SwitchSensorRelationship.DIRECT,
-    "Inverse": SwitchSensorRelationship.INVERSE,
-    "None": SwitchSensorRelationship.NONE,
+    "Direct": SWITCH_SENSOR_RELATIONSHIP.DIRECT,
+    "Inverse": SWITCH_SENSOR_RELATIONSHIP.INVERSE,
+    "None": SWITCH_SENSOR_RELATIONSHIP.NONE,
 }
 CONF_SWITCH_SENSOR_RELATIONSHIP = 'switch_sensor_relationship'
 
