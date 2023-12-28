@@ -9,7 +9,7 @@ namespace esphome {
 
         void NH_ALCV5T24::setup() {
             light_controller = PwmLightController(GPIO_NUM_15);
-            light_controller.initialize()
+            light_controller.initialize();
         }
 
         void NH_ALCV5T24::request_switch_change(bool enabled, SwitchSensorRelationship switch_sensor_relationship) {
