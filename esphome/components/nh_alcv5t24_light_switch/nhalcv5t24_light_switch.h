@@ -14,7 +14,7 @@ namespace esphome {
 
                     void write_state(bool state) override;
 
-                    void set_callback(std::function<void(bool)> &callback) {
+                    void set_callback(std::function<void(bool)> callback) {
                         on_switch_change_callback = callback;
                     }
                 private:

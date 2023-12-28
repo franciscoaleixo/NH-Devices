@@ -9,18 +9,18 @@ namespace esphome {
 
         void NH_ALCV5T24::setup() {
             light_controller = PwmLightController(GPIO_NUM_15);
-            light_controller->initialize()
+            light_controller.initialize()
         }
 
         void NH_ALCV5T24::request_switch_change(bool enabled, SwitchSensorRelationship switch_sensor_relationship) {
             bool status = enabled;
             switch(switch_sensor_relationship) {
                 case DIRECT:
-                    light_controller->change_state(status);
+                    light_controller.change_state(status);
                     break;
                 case INVERSE:
                     status = !enabled;
-                    light_controller->change_state(status);
+                    light_controller.change_state(status);
                     break;
                 case NONE:
                     break;
