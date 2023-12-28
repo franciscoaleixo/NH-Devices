@@ -19,8 +19,7 @@ namespace esphome {
                     }
                 private:
                     std::function<void(bool)> on_switch_change_callback;
-            }
-c
+            };
         } // namespace nh_alcv5t24_light_switch
     } // namespace nh_alcv5t24
 } // namespace esphome
