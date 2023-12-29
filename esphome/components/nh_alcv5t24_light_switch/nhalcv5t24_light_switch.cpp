@@ -14,8 +14,7 @@ namespace esphome {
                 on_switch_change_callback(state);
             }
 
-            void LightSwitch::dump_config()
-            {
+            void LightSwitch::dump_config() {
                 ESP_LOGCONFIG(TAG, "NH-ALCV5T24 Light Switch");
             }
 
