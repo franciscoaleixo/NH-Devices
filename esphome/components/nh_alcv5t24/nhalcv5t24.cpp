@@ -8,7 +8,6 @@ namespace esphome {
         static const char *TAG = "nh_alcv5t24";
 
         void NH_ALCV5T24::setup() {
-            light_controller = PwmLightController(GPIO_NUM_15);
             light_controller.initialize();
         }
 

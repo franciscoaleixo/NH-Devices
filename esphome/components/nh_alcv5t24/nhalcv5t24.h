@@ -30,7 +30,7 @@ namespace esphome {
                     sensors.push_back(sensor);
                 }
             protected:
-                PwmLightController light_controller;
+                PwmLightController light_controller = PwmLightController(GPIO_NUM_15);
 
                 void request_switch_change(bool enabled, SwitchSensorRelationship switch_sensor_relationship);
 
