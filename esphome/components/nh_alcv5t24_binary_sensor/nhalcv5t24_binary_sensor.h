@@ -8,6 +8,7 @@ namespace esphome {
         namespace nh_alcv5t24_binary_sensor {
             class BinarySensor : public binary_sensor::BinarySensorInitiallyOff, public Component {
                 public:
+                    void setup() override;
                     void dump_config() override;
             };
         } // namespace nh_alcv5t24_binary_sensor

@@ -6,6 +6,8 @@ namespace esphome {
         namespace nh_alcv5t24_binary_sensor {
             static const char *TAG = "nh_alcv5t24_binary_sensor";
 
+            void BinarySensor::setup() { }
+
             void BinarySensor::dump_config() {
                 ESP_LOGCONFIG(TAG, "Test");
             }
