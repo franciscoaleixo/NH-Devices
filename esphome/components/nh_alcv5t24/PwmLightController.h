@@ -9,7 +9,9 @@ class PwmLightController {
 
         void initialize();
         void change_state(bool enable);
-        bool get_current_state();
+        bool get_current_state() {
+            return currentState;
+        }
         const char* get_description();
     private:
         bool currentState = false;
