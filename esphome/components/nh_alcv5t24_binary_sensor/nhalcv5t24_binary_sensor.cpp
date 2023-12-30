@@ -30,7 +30,7 @@ namespace esphome {
                         break;
                     default:
                         ESP_LOGE(TAG, "Pin must either be 1 (GPIO6) or 2 (GPIO7)");
-                        return -1
+                        return -1;
                 }
             }
 
@@ -39,16 +39,16 @@ namespace esphome {
 
                 gpio_set_direction(gpio_nr, GPIO_MODE_INPUT);
 
-                if(this->flags & gpio::FLAG_PULLUP && this->flags & gpio::FLAG_PULLDOWN) {
+                if(flags & gpio::FLAG_PULLUP && flags & gpio::FLAG_PULLDOWN) {
                     gpio_set_pull_mode(gpio_nr, GPIO_PULLUP_PULLDOWN);
-                } else if (this->flags & gpio::FLAG_PULLUP) {
+                } else if (flags & gpio::FLAG_PULLUP) {
                     gpio_set_pull_mode(gpio_nr, GPIO_PULLUP_ONLY);
-                } else if ((this->flags & gpio::FLAG_PULLDOWN)) {
+                } else if (flags & gpio::FLAG_PULLDOWN) {
                     gpio_set_pull_mode(gpio_nr, GPIO_PULLDOWN_ONLY);
                 }
             }
 
-            bool digital_read(int pin) {
+            bool BinarySensor::digital_read(int pin) {
                 gpio_num_t gpio_nr = this->get_gpio_pin(pin);
                 return gpio_get_level(gpio_nr) == 1;
             }

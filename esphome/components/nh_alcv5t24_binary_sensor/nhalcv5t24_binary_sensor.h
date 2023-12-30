@@ -17,6 +17,7 @@ namespace esphome {
                     void dump_config() override;
                     float get_setup_priority() const override;
 
+                    void digital_read(int pin)
                     void set_pin_config(int pin, gpio::Flags flags);
                     void set_sensor_pin(GPIOPin *pin_) {pin = pin_; };
                 protected:
