@@ -28,15 +28,6 @@ BinarySensorComponent = binary_sensor_ns.class_("BinarySensor", binary_sensor.Bi
 # Custom Pin for simple binary sensors
 BinarySensorPin = binary_sensor_ns.class_("BinarySensorPin", cg.GPIOPin)
 
-def validate_mode(mode):
-    if not (mode[CONF_PULLUP] or mode[CONF_PULLDOWN]) or (
-        mode[CONF_PULLUP] and mode[CONF_PULLDOWN]
-    ):
-        raise cv.Invalid("Mode must be either pullup or pulldown")
-    if not (mode[CONF_INPUT]) or mode[CONF_OUTPUT]:
-        raise cv.Invalid("Mode must be input")
-    return mode
-
 NHALCV5T24_BINARY_PIN_SCHEMA = cv.All(
     {
         cv.GenerateID(): cv.declare_id(BinarySensorPin),
@@ -46,8 +37,7 @@ NHALCV5T24_BINARY_PIN_SCHEMA = cv.All(
             {
                 cv.Optional(CONF_PULLUP, default=False): cv.boolean,
                 cv.Optional(CONF_PULLDOWN, default=False): cv.boolean,
-            },
-            validate_mode,
+            }
         ),
         cv.Optional(CONF_INVERTED, default=False): cv.boolean,
     }
