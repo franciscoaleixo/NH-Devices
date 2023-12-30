@@ -29,8 +29,8 @@ namespace esphome {
                         return GPIO_NUM_7;
                         break;
                     default:
-                        ESP_LOGE(TAG, "Pin must either be 1 (GPIO6) or 2 (GPIO7)");
-                        return -1;
+                        ESP_LOGE(TAG, "Pin must either be 1 (GPIO6) or 2 (GPIO7), defaulting to 1.");
+                        return GPIO_NUM_6;
                 }
             }
 
