@@ -34,8 +34,9 @@ namespace esphome {
 
                     void setup() override;
                     std::string dump_summary() const override;
-                    void pin_mode(gpio::Flags flags) override;
+                    void pin_mode(gpio::Flags flags) override {};
                     bool digital_read() override;
+                    void digital_write(bool value) override{};
 
                 protected:
                     uint8_t pin;
