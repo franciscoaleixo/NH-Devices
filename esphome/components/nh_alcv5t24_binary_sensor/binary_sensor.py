@@ -25,24 +25,6 @@ CONF_NHALCV5T24_SENSOR_PIN = "sensor_pin"
 binary_sensor_ns = cg.esphome_ns.namespace("nh_alcv5t24").namespace(CONF_NHALCV5T24_BINARY_SENSOR)
 BinarySensorComponent = binary_sensor_ns.class_("BinarySensor", binary_sensor.BinarySensor, cg.Component)
 
-# Main binary sensor
-CONFIG_SCHEMA = binary_sensor.BINARY_SENSOR_SCHEMA.extend({
-  cv.GenerateID(): cv.declare_id(BinarySensorComponent),
-  cv.Required(CONF_CONTROLLER_KEY): cv.use_id(NHALCV5T24Component),
-  cv.Required(CONF_NHALCV5T24_SENSOR_PIN): pins.gpio_input_pin_schema,
-}).extend(cv.COMPONENT_SCHEMA)
-
-async def to_code(config):
-    controller = await cg.get_variable(config[CONF_CONTROLLER_KEY])
-
-    var = await binary_sensor.new_binary_sensor(config)
-    await cg.register_component(var, config)
-
-    sensor_pin = await cg.gpio_pin_expression(config[CONF_NHALCV5T24_SENSOR_PIN])
-
-    cg.add(var.set_sensor_pin(sensor_pin))
-    cg.add(controller.register_sensor(var))
-
 # Custom Pin for simple binary sensors
 BinarySensorPin = binary_sensor_ns.class_("BinarySensorPin", cg.GPIOPin)
 
@@ -54,11 +36,6 @@ def validate_mode(mode):
     if not (mode[CONF_INPUT]) or mode[CONF_OUTPUT]:
         raise cv.Invalid("Mode must be input")
     return mode
-
-def _validate_input_mode(value):
-    if value is not True:
-        raise cv.Invalid("Only input mode is supported")
-    return value
 
 NHALCV5T24_BINARY_PIN_SCHEMA = cv.All(
     {
@@ -86,3 +63,22 @@ async def nhalcv5t24_binary_sensor_pin_to_code(config):
     cg.add(var.set_inverted(config[CONF_INVERTED]))
     cg.add(var.set_flags(pins.gpio_flags_expr(config[CONF_MODE])))
     return var
+
+
+# Main binary sensor
+CONFIG_SCHEMA = binary_sensor.BINARY_SENSOR_SCHEMA.extend({
+  cv.GenerateID(): cv.declare_id(BinarySensorComponent),
+  cv.Required(CONF_CONTROLLER_KEY): cv.use_id(NHALCV5T24Component),
+  cv.Required(CONF_NHALCV5T24_SENSOR_PIN): NHALCV5T24_BINARY_PIN_SCHEMA,
+}).extend(cv.COMPONENT_SCHEMA)
+
+async def to_code(config):
+    controller = await cg.get_variable(config[CONF_CONTROLLER_KEY])
+
+    var = await binary_sensor.new_binary_sensor(config)
+    await cg.register_component(var, config)
+
+    sensor_pin = await cg.gpio_pin_expression(config[CONF_NHALCV5T24_SENSOR_PIN])
+
+    cg.add(var.set_sensor_pin(sensor_pin))
+    cg.add(controller.register_sensor(var))
