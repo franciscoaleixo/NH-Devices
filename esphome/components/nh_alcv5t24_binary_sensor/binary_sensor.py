@@ -31,7 +31,6 @@ BinarySensorPin = binary_sensor_ns.class_("BinarySensorPin", cg.GPIOPin)
 NHALCV5T24_BINARY_PIN_SCHEMA = cv.All(
     {
         cv.GenerateID(): cv.declare_id(BinarySensorPin),
-        cv.Required(CONF_NHALCV5T24_BINARY_SENSOR): cv.use_id(BinarySensorComponent),
         cv.Required(CONF_NUMBER): cv.int_range(min=1, max=2),
         cv.Optional(CONF_MODE, default={}): cv.All(
             {
