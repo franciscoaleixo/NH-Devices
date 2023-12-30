@@ -67,9 +67,7 @@ NHALCV5T24_BINARY_PIN_SCHEMA = cv.All(
         cv.Required(CONF_NUMBER): cv.int_range(min=1, max=2),
         cv.Optional(CONF_MODE, default={}): cv.All(
             {
-                cv.Optional(CONF_INPUT, default=True): cv.All(
-                    cv.boolean, _validate_input_mode
-                ),
+                cv.Optional(CONF_INPUT, default=True): cv.boolean,
                 cv.Optional(CONF_PULLUP, default=False): cv.boolean,
                 cv.Optional(CONF_PULLDOWN, default=False): cv.boolean,
             },
