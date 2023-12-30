@@ -25,8 +25,11 @@ namespace esphome {
                     break;
             }
             // Propagate the state
+            
             bool light_state = light_controller.get_current_state();
+            printf("Propagating state: %s", light_state ? "true " : "false");
             for(nh_alcv5t24_light_switch::LightSwitch *light_switch : light_switches) {
+                printf("Propagating state to lightswitch");
                 light_switch->publish_state(light_state);
             }
         }
