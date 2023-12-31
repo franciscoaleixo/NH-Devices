@@ -2,13 +2,11 @@ import esphome.config_validation as cv
 import esphome.codegen as cg
 from esphome.const import (
     CONF_ID,
-    CONF_INPUT,
     CONF_INVERTED,
     CONF_MODE,
     CONF_PULLUP,
     CONF_PULLDOWN,
     CONF_NUMBER,
-    CONF_OUTPUT,
 )
 from esphome.components import binary_sensor
 from esphome import pins

@@ -6,19 +6,6 @@
 #include "freertos/task.h"
 #include "freertos/semphr.h"
 
-
-//static IRAM_ATTR bool cb_ledc_fade_end_event(const ledc_cb_param_t *param, void *args)
-//{
-//    portBASE_TYPE taskAwoken = pdFALSE;
-//    if (param->event == LEDC_FADE_END_EVT) {
-//        QueueHandle_t queue = (QueueHandle_t) args;
-//        xSemaphoreGiveFromISR(queue, &taskAwoken);
-//    }
-//
-//    return (taskAwoken == pdTRUE);
-//}
-
-
 /**
  * PWM Light Controller for just one light, so no RGB support.
 */
