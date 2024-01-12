@@ -8,7 +8,7 @@ namespace esphome {
             static const char *TAG = "nh_alcv5t24_binary_sensor";
 
             void BinarySensor::setup() {
-                this->publish_initial_state(this->pin->digital_read());
+                this->publish_initial_state(false);
             }
 
             void BinarySensor::loop() {
