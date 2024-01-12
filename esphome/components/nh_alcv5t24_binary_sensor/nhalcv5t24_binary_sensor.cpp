@@ -10,7 +10,7 @@ namespace esphome {
             void BinarySensor::setup() {
                 // We always default to OFF until the sensor changes from the initial state
                 // as an eletricity saving feature.
-                this->initial_state = this->pin->digital_read();;
+                this->initial_state = this->pin->digital_read();
                 this->has_initialized = false;
                 this->publish_initial_state(false);
             }
@@ -21,7 +21,7 @@ namespace esphome {
                     this->publish_state(pin_state);
                 } else {
                     if(initial_state != pin_state) {
-                        this->has_initialized = true
+                        this->has_initialized = true;
                     }
                 }
                 
