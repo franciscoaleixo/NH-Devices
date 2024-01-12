@@ -24,6 +24,8 @@ namespace esphome {
                     GPIOPin *pin;
                 private:
                     gpio_num_t get_gpio_pin(int pin);
+                    bool has_initialized;
+                    bool initial_state;
             };
 
             class BinarySensorPin : public GPIOPin, public Parented<BinarySensor>{

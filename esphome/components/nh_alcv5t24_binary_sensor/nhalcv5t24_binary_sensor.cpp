@@ -8,11 +8,23 @@ namespace esphome {
             static const char *TAG = "nh_alcv5t24_binary_sensor";
 
             void BinarySensor::setup() {
+                // We always default to OFF until the sensor changes from the initial state
+                // as an eletricity saving feature.
+                this->initial_state = this->pin->digital_read();;
+                this->has_initialized = false;
                 this->publish_initial_state(false);
             }
 
             void BinarySensor::loop() {
-                this->publish_state(this->pin->digital_read());
+                bool pin_state = this->pin->digital_read();
+                if (has_initialized) {
+                    this->publish_state(pin_state);
+                } else {
+                    if(initial_state != pin_state) {
+                        this->has_initialized = true
+                    }
+                }
+                
             }
 
             float BinarySensor::get_setup_priority() const { return setup_priority::HARDWARE; }
