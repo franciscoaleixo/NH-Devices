@@ -34,12 +34,12 @@ namespace esphome {
         void NH_ALCV5T24::loop() {}
 
         void NH_ALCV5T24::dump_config() {
-            ESP_LOGCONFIG(TAG, "NH-ALCV5T24 V1 for Rev. A1 - LED PWM Constant Voltage controller - https://github.com/franciscoaleixo/NH-Project");
+            ESP_LOGCONFIG(TAG, "\nNH-ALCV5T24 V1 for Rev. A1 - LED PWM Constant Voltage controller - https://github.com/franciscoaleixo/NH-Devices");
             // Print chip information
             esp_chip_info_t chip_info;
             uint32_t flash_size;
             esp_chip_info(&chip_info);
-            ESP_LOGCONFIG(TAG, " --- Chip: %s with %d CPU core(s), WiFi%s%s%s, ",
+            ESP_LOGCONFIG(TAG, " Chip: %s with %d CPU core(s), WiFi%s%s%s, ",
                 CONFIG_IDF_TARGET,
                 chip_info.cores,
                 (chip_info.features & CHIP_FEATURE_BT) ? "/BT" : "",
@@ -54,10 +54,10 @@ namespace esphome {
                 ESP_LOGE(TAG, "Get flash size failed");
                 return;
             }
-            ESP_LOGCONFIG(TAG, "%" PRIu32 "MB %s flash\n", flash_size / (uint32_t)(1024 * 1024),
+            ESP_LOGCONFIG(TAG, "%" PRIu32 "MB %s flash", flash_size / (uint32_t)(1024 * 1024),
                 (chip_info.features & CHIP_FEATURE_EMB_FLASH) ? "embedded" : "external");
 
-            ESP_LOGCONFIG(TAG, "Minimum free heap size: %" PRIu32 " bytes ---\n", esp_get_minimum_free_heap_size());
+            ESP_LOGCONFIG(TAG, "Minimum free heap size: %" PRIu32 " bytes\n", esp_get_minimum_free_heap_size());
         }
 
     } // namespace nh_alcv5t24
