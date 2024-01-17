@@ -52,5 +52,5 @@ async def to_code(config):
     cg.add(var.set_switch_sensor_relationship(config[CONF_SWITCH_SENSOR_RELATIONSHIP]))
 
     n = await number.new_number(config[CONF_TURN_ON_BRIGHTNESS], min_value=0, max_value=1, step=0.01)
-    await cg.register_parented(var, n)
+    await cg.register_parented(n, config[CONF_ID])
     cg.add(var.set_turn_on_brightness(n))
