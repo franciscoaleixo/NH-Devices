@@ -1,12 +1,9 @@
 #include "nhalcv5t24.h"
-#include "esphome/core/log.h"
 #include "esp_chip_info.h"
 #include "esp_flash.h"
 
 namespace esphome {
     namespace nh_alcv5t24 {
-        static const char *TAG = "nh_alcv5t24";
-
         void NH_ALCV5T24::setup() {
             light_controller.initialize();
         }

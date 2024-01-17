@@ -1,13 +1,17 @@
 #pragma once
 
 #include "esphome/core/component.h"
+#include "esphome/core/log.h"
 #include "../nh_alcv5t24_light_switch/nhalcv5t24_light_switch.h"
+#include "../nh_alcv5t24_light_dimmer/nhalcv5t24_light_dimmer.h"
 #include "../nh_alcv5t24_binary_sensor/nhalcv5t24_binary_sensor.h"
 #include "./PwmLightController.h"
 
 
 namespace esphome {
     namespace nh_alcv5t24 {
+        static const char *TAG = "nh_alcv5t24";
+
         enum SwitchSensorRelationship { DIRECT, INVERSE, NONE };
 
         class NH_ALCV5T24 : public Component {
@@ -30,6 +34,15 @@ namespace esphome {
                     sensors.push_back(sensor);
                 }
 
+                void register_output(nh_alcv5t24_light_dimmer::LightDimmer *dimmer) {
+                    if(this->light_dimmer) {
+                        ESP_LOGE(TAG, "A dimmer is already registered, please register only one dimmer.");
+                        return;
+                    }
+                    dimmer->set_callback([this] (float state) { set_turn_on_brightness(state); });
+                    light_dimmer = dimmer;
+                }
+
                 void set_turn_on_brightness(float brightness){
                     this->turn_on_brightness = brightness;
                 }
@@ -39,6 +52,10 @@ namespace esphome {
                 PwmLightController light_controller = PwmLightController(GPIO_NUM_15);
 
                 void request_switch_change(bool enabled, SwitchSensorRelationship switch_sensor_relationship);
+
+                void request_brightness_change(float brightness);
+
+                nh_alcv5t24_light_dimmer::LightDimmer *light_dimmer;
 
                 std::vector<nh_alcv5t24_light_switch::LightSwitch *> light_switches;
 
