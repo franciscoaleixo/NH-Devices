@@ -12,8 +12,6 @@ namespace esphome {
                     void loop() override;
                     void dump_config() override;
 
-                    void write_state(bool state) override;
-
                     void set_callback(std::function<void(float)> callback) {
                         on_dimmer_change_callback = callback;
                     }
