@@ -6,6 +6,7 @@
 #include "../nh_alcv5t24_light_dimmer/nhalcv5t24_light_dimmer.h"
 #include "../nh_alcv5t24_binary_sensor/nhalcv5t24_binary_sensor.h"
 #include "./PwmLightController.h"
+#include "./nhalcv5t24_turn_on_brightness_number.h"
 
 
 namespace esphome {
@@ -43,11 +44,11 @@ namespace esphome {
                     light_dimmer = dimmer;
                 }
 
-                void set_turn_on_brightness(float brightness){
-                    this->turn_on_brightness = brightness;
+                void set_turn_on_brightness(TurnOnBrightnessNumber *number){
+                    this->turn_on_brightness = number;
                 }
             protected:
-                float turn_on_brightness = 1.0;
+                TurnOnBrightnessNumber * turn_on_brightness;
 
                 PwmLightController light_controller = PwmLightController(GPIO_NUM_15);
 
