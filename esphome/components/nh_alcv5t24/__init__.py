@@ -3,7 +3,6 @@ import esphome.codegen as cg
 
 from esphome.const import CONF_ID
 from esphome.components import output
-
 # Metadata
 CODEOWNERS = ["@franciscoaleixo"]
 
@@ -39,5 +38,4 @@ async def to_code(config):
     await cg.register_component(var, config)
 
     cg.add(var.set_switch_sensor_relationship(config[CONF_SWITCH_SENSOR_RELATIONSHIP]))
-    #cg.add(var.set_turn_on_brightness(config[CONF_TURN_ON_BRIGHTNESS]))
-    cg.add(var.set_turn_on_brightness(config[CONF_OUTPUT]))
+    cg.add(var.set_turn_on_brightness(config[CONF_TURN_ON_BRIGHTNESS]))
