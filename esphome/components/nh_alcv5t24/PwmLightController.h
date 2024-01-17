@@ -8,7 +8,7 @@ class PwmLightController {
         PwmLightController(gpio_num_t gpio) { gpio_nr = gpio; }; 
 
         void initialize();
-        void change_state(bool enable);
+        void change_state(bool enable, float turn_on_brightness);
         bool get_current_state() {
             return currentState;
         }
@@ -29,7 +29,7 @@ class PwmLightController {
 
 
         // Converts 0..1 target duty cycle to an adjusted duty resolution duty cycle
-        int get_adj_duty_cycle(double target) {
+        int get_adj_duty_cycle(float target) {
             return static_cast<int>(target * (1 << ledc_conf.duty_resolution) + 0.5);
         }
 };

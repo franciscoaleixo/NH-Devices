@@ -15,11 +15,11 @@ namespace esphome {
             bool status = enabled;
             switch(switch_sensor_relationship) {
                 case DIRECT:
-                    light_controller.change_state(status);
+                    light_controller.change_state(status, this->turn_on_brightness);
                     break;
                 case INVERSE:
                     status = !enabled;
-                    light_controller.change_state(status);
+                    light_controller.change_state(status, this->turn_on_brightness);
                     break;
                 case NONE:
                     break;

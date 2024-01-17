@@ -29,7 +29,13 @@ namespace esphome {
                     sensor->add_on_state_callback([this] (bool enabled) { request_switch_change(enabled, switch_sensor_relationship); });
                     sensors.push_back(sensor);
                 }
+
+                void set_turn_on_brightness(float brightness){
+                    this->turn_on_brightness = brightness;
+                }
             protected:
+                float turn_on_brightness = 1.0;
+
                 PwmLightController light_controller = PwmLightController(GPIO_NUM_15);
 
                 void request_switch_change(bool enabled, SwitchSensorRelationship switch_sensor_relationship);

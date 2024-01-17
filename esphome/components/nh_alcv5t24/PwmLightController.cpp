@@ -50,13 +50,13 @@ void PwmLightController::initialize()
 
 }
 
-void PwmLightController::change_state(bool enable) 
+void PwmLightController::change_state(bool enable, float turn_on_brightness) 
 {
     ledc_fade_stop(ledc_channel.speed_mode, ledc_channel.channel);
     this->currentState = enable;
     if(enable){
         printf("PWM Light Controller - Turning ON lights\n");
-        ledc_set_fade_with_time(ledc_channel.speed_mode, ledc_channel.channel, get_adj_duty_cycle(0.8), fade_time_ms);
+        ledc_set_fade_with_time(ledc_channel.speed_mode, ledc_channel.channel, get_adj_duty_cycle(turn_on_brightness), fade_time_ms);
         ledc_fade_start(ledc_channel.speed_mode, ledc_channel.channel, LEDC_FADE_NO_WAIT);
     }
     else {
