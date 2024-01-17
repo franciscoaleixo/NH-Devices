@@ -25,7 +25,7 @@ SWITCH_SENSOR_RELATIONSHIP_OPTIONS = {
 CONF_SWITCH_SENSOR_RELATIONSHIP = 'switch_sensor_relationship'
 
 CONF_TURN_ON_BRIGHTNESS = "turn_on_brightness"
-TurnOnBrightnessNumber = nh_alcv5t24s_ns.class_("TurnOnBrightnessNumber", number.number)
+TurnOnBrightnessNumber = nh_alcv5t24s_ns.class_("TurnOnBrightnessNumber", number.Number)
 
 CONF_OUTPUT = "output"
 
