@@ -2,7 +2,7 @@ import esphome.config_validation as cv
 import esphome.codegen as cg
 from esphome.const import CONF_ID
 from esphome.components import number
-from ..nh_alcv5t24 import NHALCV5T24Component, CONF_CONTROLLER_KEY, CONF_NUMBER_CONTROL_TYPE, NUMBER_CONTROL_TYPE_OPTIONS
+from ..nh_alcv5t24 import NHALCV5T24Component, CONF_CONTROLLER_KEY
 
 # Metadata
 CODEOWNERS = ["@franciscoaleixo"]
