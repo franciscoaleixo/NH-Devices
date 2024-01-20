@@ -24,8 +24,11 @@ SWITCH_SENSOR_RELATIONSHIP_OPTIONS = {
 }
 CONF_SWITCH_SENSOR_RELATIONSHIP = 'switch_sensor_relationship'
 
-CONF_TURN_ON_BRIGHTNESS = "turn_on_brightness"
-TurnOnBrightnessNumber = nh_alcv5t24s_ns.class_("TurnOnBrightnessNumber", number.Number)
+CONF_NUMBER_CONTROL_TYPE =  nh_alcv5t24s_ns.enum("NumberControlType")
+NUMBER_CONTROL_TYPE_OPTIONS = {
+    "TurnOnBrightness": CONF_NUMBER_CONTROL_TYPE.TURN_ON_BRIGHTNESS,
+    "TurnOffBrightness": CONF_NUMBER_CONTROL_TYPE.TURN_OFF_BRIGHTNESS,
+}
 
 CONF_OUTPUT = "output"
 
@@ -35,14 +38,6 @@ CONF_CONTROLLER_KEY = 'controller_id'
 CONFIG_SCHEMA = cv.Schema({
   cv.GenerateID(): cv.declare_id(NHALCV5T24Component),
   cv.Required(CONF_SWITCH_SENSOR_RELATIONSHIP): cv.enum(SWITCH_SENSOR_RELATIONSHIP_OPTIONS),
-  #cv.Optional(CONF_TURN_ON_BRIGHTNESS, default=1.0): cv.percentage,
-  cv.Optional(CONF_TURN_ON_BRIGHTNESS): number.number_schema(
-            TurnOnBrightnessNumber,
-            device_class=DEVICE_CLASS_ILLUMINANCE,
-            entity_category=ENTITY_CATEGORY_CONFIG,
-            icon=ICON_LIGHTBULB,
-        ),
-  #cv.Optional(CONF_OUTPUT): cv.use_id(output.FloatOutput),
 }).extend(cv.COMPONENT_SCHEMA)
 
 async def to_code(config):
@@ -50,7 +45,3 @@ async def to_code(config):
     await cg.register_component(var, config)
 
     cg.add(var.set_switch_sensor_relationship(config[CONF_SWITCH_SENSOR_RELATIONSHIP]))
-
-    n = await number.new_number(config[CONF_TURN_ON_BRIGHTNESS], min_value=0, max_value=1, step=0.01)
-    await cg.register_parented(n, config[CONF_ID])
-    cg.add(var.set_turn_on_brightness(n))

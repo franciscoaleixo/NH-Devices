@@ -5,7 +5,7 @@
 #include "../nh_alcv5t24_light_switch/nhalcv5t24_light_switch.h"
 #include "../nh_alcv5t24_binary_sensor/nhalcv5t24_binary_sensor.h"
 #include "./PwmLightController.h"
-#include "./nhalcv5t24_turn_on_brightness_number.h"
+#include "../nh_alcv5t24_light_control/nhalcv5t24_light_control.h"
 
 
 namespace esphome {
@@ -13,6 +13,8 @@ namespace esphome {
         static const char *TAG = "nh_alcv5t24";
 
         enum SwitchSensorRelationship { DIRECT, INVERSE, NONE };
+
+        enum NumberControlType { TURN_ON_BRIGHTNESS, TURN_OFF_BRIGHTNESS };
 
         class NH_ALCV5T24 : public Component {
             public:
@@ -34,20 +36,10 @@ namespace esphome {
                     sensors.push_back(sensor);
                 }
 
-                void register_output(nh_alcv5t24_light_dimmer::LightDimmer *dimmer) {
-                    if(this->light_dimmer) {
-                        ESP_LOGE(TAG, "A dimmer is already registered, please register only one dimmer.");
-                        return;
-                    }
-                    dimmer->set_callback([this] (float state) { set_turn_on_brightness(state); });
-                    light_dimmer = dimmer;
-                }
-
-                void set_turn_on_brightness(TurnOnBrightnessNumber *number){
-                    this->turn_on_brightness = number;
+                void register_number_control(nh_alcv5t24_light_control::LightControl *light_control){
+                    control_numbers_map.insert(std::pair<NumberControlType, nh_alcv5t24_light_control::LightControl *>(light_control->get_control_type(), light_control));
                 }
             protected:
-                TurnOnBrightnessNumber * turn_on_brightness;
 
                 PwmLightController light_controller = PwmLightController(GPIO_NUM_15);
 
@@ -62,6 +54,8 @@ namespace esphome {
                 std::vector<nh_alcv5t24_binary_sensor::BinarySensor *> sensors;
                 
                 SwitchSensorRelationship switch_sensor_relationship;
+
+                std::map<NumberControlType, nh_alcv5t24_light_control::LightControl*> control_numbers_map;
         };
     }  // namespace nh_alcv5t24
 }  // namespace esphome
