@@ -23,15 +23,14 @@ SWITCH_SENSOR_RELATIONSHIP_OPTIONS = {
     "None": SWITCH_SENSOR_RELATIONSHIP.NONE,
 }
 CONF_SWITCH_SENSOR_RELATIONSHIP = 'switch_sensor_relationship'
-
-CONF_NUMBER_CONTROL_TYPE =  nh_alcv5t24s_ns.enum("NumberControlType")
+# --- 
+NUMBER_CONTROL_TYPE =  nh_alcv5t24s_ns.enum("NumberControlType")
 NUMBER_CONTROL_TYPE_OPTIONS = {
-    "TurnOnBrightness": CONF_NUMBER_CONTROL_TYPE.TURN_ON_BRIGHTNESS,
-    "TurnOffBrightness": CONF_NUMBER_CONTROL_TYPE.TURN_OFF_BRIGHTNESS,
+    "TurnOnBrightness": NUMBER_CONTROL_TYPE.TURN_ON_BRIGHTNESS,
+    "TurnOffBrightness": NUMBER_CONTROL_TYPE.TURN_OFF_BRIGHTNESS,
 }
-
-CONF_OUTPUT = "output"
-
+CONF_NUMBER_CONTROL_TYPE = "control_type"
+# ---
 CONF_CONTROLLER_KEY = 'controller_id'
 
 # Schema
