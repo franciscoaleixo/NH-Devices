@@ -8,7 +8,7 @@ class PwmLightController {
         PwmLightController(gpio_num_t gpio) { gpio_nr = gpio; }; 
 
         void initialize();
-        void change_state(bool enable, float turn_on_brightness);
+        void change_state(bool enable, float onValue, float offValue);
         bool get_current_state() {
             return currentState;
         }
