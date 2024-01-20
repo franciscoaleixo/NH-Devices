@@ -2,11 +2,12 @@
 
 #include "esphome/core/component.h"
 #include "esphome/components/number/number.h"
-#include "../nh_alcv5t24/nhalcv5t24.h"
 
 namespace esphome {
     namespace nh_alcv5t24 {
         namespace nh_alcv5t24_light_control {
+            enum NumberControlType { TURN_ON_BRIGHTNESS, TURN_OFF_BRIGHTNESS };
+
             class LightControl : public number::Number, public Component {
                 public:
                     void setup() override;
@@ -14,7 +15,7 @@ namespace esphome {
                     void dump_config() override;
 
                     void set_control_type(NumberControlType type) {
-                        this->controlType = type;
+                        controlType = type;
                     }
 
                     NumberControlType get_control_type() {

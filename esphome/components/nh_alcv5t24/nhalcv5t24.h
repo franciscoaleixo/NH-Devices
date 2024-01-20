@@ -15,8 +15,6 @@ namespace esphome {
 
         enum SwitchSensorRelationship { DIRECT, INVERSE, NONE };
 
-        enum NumberControlType { TURN_ON_BRIGHTNESS, TURN_OFF_BRIGHTNESS };
-
         class NH_ALCV5T24 : public Component {
             public:
                 void setup() override;
@@ -38,7 +36,7 @@ namespace esphome {
                 }
 
                 void register_number_control(nh_alcv5t24_light_control::LightControl *light_control){
-                    control_numbers_map.insert(std::pair<NumberControlType, nh_alcv5t24_light_control::LightControl *>(light_control->get_control_type(), light_control));
+                    control_numbers_map.insert(std::pair<nh_alcv5t24_light_control::NumberControlType, nh_alcv5t24_light_control::LightControl *>(light_control->get_control_type(), light_control));
                 }
             protected:
 
@@ -54,7 +52,7 @@ namespace esphome {
                 
                 SwitchSensorRelationship switch_sensor_relationship;
 
-                std::map<NumberControlType, nh_alcv5t24_light_control::LightControl*> control_numbers_map;
+                std::map<nh_alcv5t24_light_control::NumberControlType, nh_alcv5t24_light_control::LightControl*> control_numbers_map;
         };
     }  // namespace nh_alcv5t24
 }  // namespace esphome

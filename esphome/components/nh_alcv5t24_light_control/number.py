@@ -11,6 +11,14 @@ CODEOWNERS = ["@franciscoaleixo"]
 light_control_ns = cg.esphome_ns.namespace("nh_alcv5t24").namespace('nh_alcv5t24_light_control')
 LightControlComponent = light_control_ns.class_("LightControl", number.Number, cg.Component)
 
+# Atributes
+NUMBER_CONTROL_TYPE =  light_control_ns.enum("NumberControlType")
+NUMBER_CONTROL_TYPE_OPTIONS = {
+    "TurnOnBrightness": NUMBER_CONTROL_TYPE.TURN_ON_BRIGHTNESS,
+    "TurnOffBrightness": NUMBER_CONTROL_TYPE.TURN_OFF_BRIGHTNESS,
+}
+CONF_NUMBER_CONTROL_TYPE = "control_type"
+
 CONFIG_SCHEMA = number.number_schema(LightControlComponent).extend({
         cv.GenerateID(): cv.declare_id(LightControlComponent),
         cv.Required(CONF_CONTROLLER_KEY): cv.use_id(NHALCV5T24Component),

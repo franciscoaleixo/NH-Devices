@@ -12,8 +12,8 @@ namespace esphome {
             bool status = enabled;
             float onValue = 0.0;
             float offValue = 1.0;
-            nh_alcv5t24_light_control::LightControl* custom_turn_on_brightness_number = this->control_numbers_map[TURN_ON_BRIGHTNESS];
-            nh_alcv5t24_light_control::LightControl* custom_turn_off_brightness_number = this->control_numbers_map[TURN_OFF_BRIGHTNESS];
+            nh_alcv5t24_light_control::LightControl* custom_turn_on_brightness_number = this->control_numbers_map[nh_alcv5t24_light_control::TURN_ON_BRIGHTNESS];
+            nh_alcv5t24_light_control::LightControl* custom_turn_off_brightness_number = this->control_numbers_map[nh_alcv5t24_light_control::TURN_OFF_BRIGHTNESS];
             if(custom_turn_on_brightness_number) {
                 onValue = custom_turn_on_brightness_number->state;
             }
