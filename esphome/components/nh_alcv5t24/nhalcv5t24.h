@@ -47,8 +47,6 @@ namespace esphome {
 
                 void request_brightness_change(float brightness);
 
-                nh_alcv5t24_light_dimmer::LightDimmer *light_dimmer;
-
                 std::vector<nh_alcv5t24_light_switch::LightSwitch *> light_switches;
 
                 std::vector<nh_alcv5t24_binary_sensor::BinarySensor *> sensors;
