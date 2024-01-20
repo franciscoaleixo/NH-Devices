@@ -11,7 +11,7 @@ namespace esphome {
             void LightControl::loop(){}
 
             void LightControl::control(float state) {
-                this->publish_state(value);
+                this->publish_state(state);
             }
 
             void LightControl::dump_config() {
