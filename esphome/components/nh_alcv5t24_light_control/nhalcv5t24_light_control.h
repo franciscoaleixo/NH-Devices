@@ -14,7 +14,7 @@ namespace esphome {
                     void dump_config() override;
 
                     void set_control_type(NumberControlType type) {
-                        controlType = type;
+                        this->controlType = type;
                     }
 
                     NumberControlType get_control_type() {

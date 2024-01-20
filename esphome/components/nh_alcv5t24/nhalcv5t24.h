@@ -1,5 +1,6 @@
 #pragma once
 
+#include <map>
 #include "esphome/core/component.h"
 #include "esphome/core/log.h"
 #include "../nh_alcv5t24_light_switch/nhalcv5t24_light_switch.h"
