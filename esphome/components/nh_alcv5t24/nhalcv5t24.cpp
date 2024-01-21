@@ -29,6 +29,7 @@ namespace esphome {
         }
 
         void NH_ALCV5T24::request_control_change(nh_alcv5t24_light_control::LightControl *light_control) {
+            printf("request_control_change: %f", light_control->state);
             switch(light_control->get_control_type()) {
                 case nh_alcv5t24_light_control::TURN_ON_BRIGHTNESS:
                     light_controller.change_on_value(light_control->state);
