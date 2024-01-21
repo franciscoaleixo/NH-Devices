@@ -10,23 +10,13 @@ namespace esphome {
 
         void NH_ALCV5T24::request_switch_change(bool enabled, SwitchSensorRelationship switch_sensor_relationship) {
             bool status = enabled;
-            float onValue = 0.0;
-            float offValue = 1.0;
-            nh_alcv5t24_light_control::LightControl* custom_turn_on_brightness_number = this->control_numbers_map[nh_alcv5t24_light_control::TURN_ON_BRIGHTNESS];
-            nh_alcv5t24_light_control::LightControl* custom_turn_off_brightness_number = this->control_numbers_map[nh_alcv5t24_light_control::TURN_OFF_BRIGHTNESS];
-            if(custom_turn_on_brightness_number) {
-                onValue = custom_turn_on_brightness_number->state;
-            }
-            if(custom_turn_off_brightness_number) {
-                offValue = custom_turn_off_brightness_number->state;
-            }
             switch(switch_sensor_relationship) {
                 case DIRECT:
-                    light_controller.change_state(status, onValue, offValue);
+                    light_controller.change_state(status);
                     break;
                 case INVERSE:
                     status = !enabled;
-                    light_controller.change_state(status, onValue, offValue);
+                    light_controller.change_state(status);
                     break;
                 case NONE:
                     break;
@@ -35,6 +25,17 @@ namespace esphome {
             bool light_state = light_controller.get_current_state();
             for(nh_alcv5t24_light_switch::LightSwitch *light_switch : light_switches) {
                 light_switch->publish_state(light_state);
+            }
+        }
+
+        void NH_ALCV5T24::request_control_change(nh_alcv5t24_light_control::LightControl *light_control) {
+            switch(light_control->get_control_type()) {
+                case nh_alcv5t24_light_control::TURN_ON_BRIGHTNESS:
+                    light_controller.change_on_value(light_control->state);
+                    break;
+                case nh_alcv5t24_light_control::TURN_OFF_BRIGHTNESS:
+                    light_controller.change_off_value(light_control->state);
+                    break;
             }
         }
 

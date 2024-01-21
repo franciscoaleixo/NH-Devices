@@ -21,11 +21,16 @@ namespace esphome {
                     NumberControlType get_control_type() {
                         return this->controlType;
                     }
+
+                    void set_callback(std::function<void(bool)> callback) {
+                        on_number_change_callback = callback;
+                    }
                     
                 protected:
                     void control(float value) override;
                 private:
                     NumberControlType controlType;
+                    std::function<void(bool)> on_number_change_callback;
             };
         } // namespace nh_alcv5t24_light_control
     } // namespace nh_alcv5t24

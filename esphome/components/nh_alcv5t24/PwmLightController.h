@@ -8,13 +8,25 @@ class PwmLightController {
         PwmLightController(gpio_num_t gpio) { gpio_nr = gpio; }; 
 
         void initialize();
-        void change_state(bool enable, float onValue, float offValue);
+
+        void change_state(bool enable);
+        void change_on_value(float onVal) {
+            onValue = onVal;
+            adjust_lights();
+        }
+        void change_off_value(float offVal) {
+            offValue = offVal;
+            adjust_lights();
+        }
+
         bool get_current_state() {
             return currentState;
         }
         const char* get_description();
     private:
         bool currentState = false;
+        float onValue = 1.0;
+        float offValue = 0.0;
 
         gpio_num_t gpio_nr;
         int fade_time_ms = 1000;
@@ -27,6 +39,7 @@ class PwmLightController {
         ledc_timer_config_t ledc_conf;
         ledc_channel_config_t ledc_channel;
 
+        void adjust_lights();
 
         // Converts 0..1 target duty cycle to an adjusted duty resolution duty cycle
         int get_adj_duty_cycle(float target) {
