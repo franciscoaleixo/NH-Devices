@@ -22,7 +22,7 @@ namespace esphome {
                         return this->controlType;
                     }
 
-                    void set_callback(std::function<void(bool)> callback) {
+                    void set_callback(std::function<void(float, nh_alcv5t24_light_control::NumberControlType)> callback) {
                         on_number_change_callback = callback;
                     }
                     
@@ -30,7 +30,7 @@ namespace esphome {
                     void control(float value) override;
                 private:
                     NumberControlType controlType;
-                    std::function<void(bool)> on_number_change_callback;
+                    std::function<void(float, nh_alcv5t24_light_control::NumberControlType)> on_number_change_callback;
             };
         } // namespace nh_alcv5t24_light_control
     } // namespace nh_alcv5t24

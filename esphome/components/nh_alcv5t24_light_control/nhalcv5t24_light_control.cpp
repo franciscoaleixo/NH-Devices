@@ -12,7 +12,7 @@ namespace esphome {
 
             void LightControl::control(float state) {
                 this->publish_state(state);
-                on_number_change_callback(state);
+                on_number_change_callback(state, get_control_type());
             }
 
             void LightControl::dump_config() {

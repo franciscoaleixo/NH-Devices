@@ -39,7 +39,7 @@ namespace esphome {
                     ESP_LOGD(TAG, "register_number_control\n");
                     if(!control_numbers_map.contains(light_control->get_control_type())) {
                          ESP_LOGD(TAG, "register_number_control -- 2\n");
-                        light_control->set_callback([this, &light_control] (bool enabled) { request_control_change(light_control); });
+                        light_control->set_callback([this] (float value, nh_alcv5t24_light_control::NumberControlType controlType) { request_control_change(value, controlType); });
                         control_numbers_map.insert(std::pair<nh_alcv5t24_light_control::NumberControlType, nh_alcv5t24_light_control::LightControl *>(light_control->get_control_type(), light_control));
                     } else {
                         ESP_LOGE(TAG, "A number is already registered to this type. Ignoring...");
@@ -53,7 +53,7 @@ namespace esphome {
 
                 void request_brightness_change(float brightness);
 
-                void request_control_change(nh_alcv5t24_light_control::LightControl *light_control);
+                void request_control_change(float value, nh_alcv5t24_light_control::NumberControlType controlType);
 
                 std::vector<nh_alcv5t24_light_switch::LightSwitch *> light_switches;
 
