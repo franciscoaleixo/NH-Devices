@@ -18,11 +18,13 @@ NUMBER_CONTROL_TYPE_OPTIONS = {
     "TurnOffBrightness": NUMBER_CONTROL_TYPE.TURN_OFF_BRIGHTNESS,
 }
 CONF_NUMBER_CONTROL_TYPE = "control_type"
+CONF_NUMBER_INITIAL_VALUE = "initial_value"
 
 CONFIG_SCHEMA = number.number_schema(LightControlComponent).extend({
         cv.GenerateID(): cv.declare_id(LightControlComponent),
         cv.Required(CONF_CONTROLLER_KEY): cv.use_id(NHALCV5T24Component),
         cv.Required(CONF_NUMBER_CONTROL_TYPE): cv.enum(NUMBER_CONTROL_TYPE_OPTIONS),
+        cv.Required(CONF_NUMBER_INITIAL_VALUE): cv.percentage,
     }
 ).extend(cv.COMPONENT_SCHEMA)
 
@@ -39,5 +41,6 @@ async def to_code(config):
         step=0.01
     )
     cg.add(var.set_control_type(config[CONF_NUMBER_CONTROL_TYPE]))
+    cg.add(var.set_initial_value(config[CONF_NUMBER_INITIAL_VALUE]))
 
     cg.add(controller.register_number_control(var))

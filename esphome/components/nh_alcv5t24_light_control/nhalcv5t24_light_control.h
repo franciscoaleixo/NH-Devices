@@ -18,6 +18,10 @@ namespace esphome {
                         controlType = type;
                     }
 
+                    void set_initial_value(float value) {
+                        initialValue = value;
+                    }
+
                     NumberControlType get_control_type() {
                         return this->controlType;
                     }
@@ -29,6 +33,7 @@ namespace esphome {
                 protected:
                     void control(float value) override;
                 private:
+                    float initialValue;
                     NumberControlType controlType;
                     std::function<void(float, nh_alcv5t24_light_control::NumberControlType)> on_number_change_callback;
             };
