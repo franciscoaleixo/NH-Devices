@@ -8,6 +8,7 @@ namespace esphome {
 
             void LightControl::setup(){
                 this->publish_state(this->state);
+                on_number_change_callback(state, get_control_type());
             }
 
             void LightControl::loop(){}
