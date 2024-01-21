@@ -6,7 +6,9 @@ namespace esphome {
         namespace nh_alcv5t24_light_control {
             static const char *TAG = "nh_alcv5t24_light_control";
 
-            void LightControl::setup(){}
+            void LightControl::setup(){
+                this->publish_state(this->state);
+            }
 
             void LightControl::loop(){}
 

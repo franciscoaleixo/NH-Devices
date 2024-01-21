@@ -36,9 +36,7 @@ namespace esphome {
                 }
 
                 void register_number_control(nh_alcv5t24_light_control::LightControl *light_control){
-                    ESP_LOGD(TAG, "register_number_control\n");
                     if(!control_numbers_map.contains(light_control->get_control_type())) {
-                         ESP_LOGD(TAG, "register_number_control -- 2\n");
                         light_control->set_callback([this] (float value, nh_alcv5t24_light_control::NumberControlType controlType) { request_control_change(value, controlType); });
                         control_numbers_map.insert(std::pair<nh_alcv5t24_light_control::NumberControlType, nh_alcv5t24_light_control::LightControl *>(light_control->get_control_type(), light_control));
                     } else {
