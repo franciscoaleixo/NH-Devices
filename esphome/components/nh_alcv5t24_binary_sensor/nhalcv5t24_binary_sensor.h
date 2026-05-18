@@ -35,8 +35,9 @@ namespace esphome {
                     void set_flags(gpio::Flags flags_) { this->flags = flags_; }
 
                     void setup() override;
-                    std::string dump_summary() const override;
+                    size_t dump_summary(char *buffer, size_t len) const override;
                     void pin_mode(gpio::Flags flags) override {};
+                    gpio::Flags get_flags() const override { return this->flags; };
                     bool digital_read() override;
                     void digital_write(bool value) override{};
 

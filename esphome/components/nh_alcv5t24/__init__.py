@@ -11,6 +11,19 @@ from esphome.components import output, number
 # Metadata
 CODEOWNERS = ["@franciscoaleixo"]
 
+# The hub header pulls in the sub-component headers unconditionally, and those
+# in turn need the core switch/binary_sensor/number base classes. All of these
+# sources must be copied into the build even when a given device config doesn't
+# use that platform (e.g. no `number:` -> no light_control / number otherwise).
+AUTO_LOAD = [
+    "nh_alcv5t24_light_switch",
+    "nh_alcv5t24_binary_sensor",
+    "nh_alcv5t24_light_control",
+    "switch",
+    "binary_sensor",
+    "number",
+]
+
 # Namespace / Component
 nh_alcv5t24s_ns = cg.esphome_ns.namespace("nh_alcv5t24")
 NHALCV5T24Component = nh_alcv5t24s_ns.class_("NH_ALCV5T24", cg.Component)

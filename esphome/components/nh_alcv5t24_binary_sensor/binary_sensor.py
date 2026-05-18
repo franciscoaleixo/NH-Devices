@@ -52,11 +52,14 @@ async def nhalcv5t24_binary_sensor_pin_to_code(config):
 
 
 # Main binary sensor
-CONFIG_SCHEMA = binary_sensor.BINARY_SENSOR_SCHEMA.extend({
-  cv.GenerateID(): cv.declare_id(BinarySensorComponent),
-  cv.Required(CONF_CONTROLLER_KEY): cv.use_id(NHALCV5T24Component),
-  cv.Required(CONF_NHALCV5T24_SENSOR_PIN): NHALCV5T24_BINARY_PIN_SCHEMA,
-}).extend(cv.COMPONENT_SCHEMA)
+CONFIG_SCHEMA = (
+    binary_sensor.binary_sensor_schema(BinarySensorComponent)
+    .extend({
+        cv.Required(CONF_CONTROLLER_KEY): cv.use_id(NHALCV5T24Component),
+        cv.Required(CONF_NHALCV5T24_SENSOR_PIN): NHALCV5T24_BINARY_PIN_SCHEMA,
+    })
+    .extend(cv.COMPONENT_SCHEMA)
+)
 
 async def to_code(config):
     controller = await cg.get_variable(config[CONF_CONTROLLER_KEY])

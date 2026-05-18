@@ -70,7 +70,9 @@ namespace esphome {
             void BinarySensorPin::setup() {
                 this->parent_->set_pin_config(this->pin, this->flags);
             }
-            std::string BinarySensorPin::dump_summary() const { return str_snprintf("%u via NHALCV5T24", 15, this->pin); }
+            size_t BinarySensorPin::dump_summary(char *buffer, size_t len) const {
+                return snprintf(buffer, len, "%u via NHALCV5T24", this->pin);
+            }
             bool BinarySensorPin::digital_read() { return this->parent_->digital_read(this->pin) != this->inverted; }
         } // namespace nh_alcv5t24_binary_sensor
     } // namespace nh_alcv5t24

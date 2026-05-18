@@ -7,15 +7,35 @@ esp32:
   variant: esp32c6
   framework:
     type: esp-idf
-    platform_version: "https://github.com/stintel/platform-espressif32#esp32-c6-test"
-    version: 5.1.2
+    advanced:
+      # Keep the ESP-IDF secondary console on the chip's native USB-Serial-JTAG so the
+      # bootloader banner AND panic/crash backtraces still appear on the native-USB port
+      # ("USB Serial Device" COM), even though the rich ESPHome log stream below is
+      # routed to UART0. ESPHome 2026.4 disables this secondary console by default.
+      disable_usb_serial_jtag_secondary: false
 
-# Enable logging
+# Enable logging.
+# hardware_uart: UART0 routes the full ESPHome log stream to the onboard USB-to-UART
+# bridge ("USB Serial Port" COM). On the ESP32-C6, ESPHome 2026.4 would otherwise
+# default this to USB_SERIAL_JTAG. Combined with the secondary console above:
+#   - UART bridge port -> full ESPHome logs + boot
+#   - native USB port  -> bootloader + crash backtraces
 logger:
+  hardware_uart: UART0
 
 wifi: # Your wifi logic
   ssid: !secret wifi_ssid
   password: !secret wifi_password
+
+  # Fallback hotspot: if the configured WiFi can't be joined (e.g. SSID/password
+  # changed), the device exposes its own AP so you can recover it WITHOUT a reflash.
+  ap:
+    ssid: "Closetlswitch Fallback"
+    password: "CHANGEME12345"   # set your own; min 8 chars
+
+# Serves a setup page on the fallback hotspot to enter new WiFi credentials live.
+# Without this, the ap: above has no UI and recovery requires a USB reflash.
+captive_portal:
 
 external_components:
   - source: github://franciscoaleixo/NH-Devices@main

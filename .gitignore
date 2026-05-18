@@ -2,3 +2,10 @@
 .devcontainer/
 .vscode/
 build/
+.esphome/
+__pycache__/
+
+# Local-only: secrets, local test config, agent workspace
+secrets.yaml
+nh-test.yaml
+.claude/
